@@ -25,7 +25,7 @@ class Potluck
     categories = @dishes.map { |dish| dish.category}.uniq
 
     categories.each do |category|
-      menu["#{category}s".to_sym] = get_all_from_category(category).map do |dish|
+      menu_hash["#{category}s".to_sym] = get_all_from_category(category).map do |dish|
         dish.name
       end.sort
     end
