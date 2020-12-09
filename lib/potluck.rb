@@ -15,23 +15,22 @@ class Potluck
 
   def get_all_from_category(category)
     @dishes.find_all do |dish|
-      dish if dish.category == category
+      dish.category == category
     end
   end
 
   def menu
-    menu = {}
+    menu_hash = {}
 
-    categories = @dishes.map do |dish|
-      dish.category
-    end.uniq
+    categories = @dishes.map { |dish| dish.category}.uniq
 
     categories.each do |category|
       menu["#{category}s".to_sym] = get_all_from_category(category).map do |dish|
         dish.name
       end.sort
     end
-    menu
+
+    menu_hash
   end
 
   def ratio(category)
