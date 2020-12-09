@@ -18,4 +18,23 @@ class Potluck
       dish if dish.category == category
     end
   end
+
+  def menu
+    menu = {}
+
+    categories = @dishes.map do |dish|
+      dish.category
+    end.uniq
+
+    categories.each do |category|
+      menu["#{category}s".to_sym] = get_all_from_category(category).map do |dish|
+        dish.name
+      end.sort
+    end
+    menu
+  end
+
+  def ratio(category)
+    ((get_all_from_category(category).length / @dishes.length.to_f) * 100).round(2)
+  end
 end
